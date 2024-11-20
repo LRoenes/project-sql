@@ -15,15 +15,40 @@ public class GeneralHelpers {
 
     }
 
-    public static String createTable(String nameOftable){
+    public static void createTable(String nameOftable){
         
-        System.out.println();
-        System.out.println(nameOftable);
+        String fileName = nameOftable + ".cvs";
+        String path = "src/myTables/";
+        File directory = new File(path);
+        System.out.println("HOLIII!");
 
-        return "";
+        try {
+          
+            File myTable = new File(directory+"\\"+fileName);
+            new File(myTable.getParent()).mkdirs();
+            if (myTable.createNewFile()) {
+
+                System.out.println("Your table has been created succesfully!");
+                getUserInput();
+                
+            }else{
+
+                System.out.println("An error has ocurred while creating your table");
+                getUserInput();
+
+
+            }
+        
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+                
+        
 
         //trabajar aqui
-
+        
     }
 
     

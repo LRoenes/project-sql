@@ -10,7 +10,11 @@ public class App {
 
         while(true){
 
+
             String userInput[] = GeneralHelpers.getUserInput();
+
+    
+            GeneralHelpers.createTable(userInput[2]);
 
             String joinedStrings = String.join("", userInput);
             if(joinedStrings.equalsIgnoreCase("clear")){
@@ -21,6 +25,7 @@ public class App {
                 for (String token : userInput) {
                 String category = orderTokens(token);
                 categorizedTokens.add(token + " (" + category + ")");
+                System.out.println(category);
 
             }
 
