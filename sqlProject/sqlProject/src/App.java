@@ -11,49 +11,28 @@ public class App {
         while(true){
 
 
-            String userInput[] = GeneralHelpers.getUserInput();
+            ArrayList<String> query = GeneralHelpers.getUserInput();
 
-    
-            GeneralHelpers.createTable(userInput[2]);
+            System.out.println(query);
+            GeneralHelpers.createTable(query);
 
-            String joinedStrings = String.join("", userInput);
+           
+
+            String joinedStrings = String.join("", query);
             if(joinedStrings.equalsIgnoreCase("clear")){
                GeneralHelpers.clearConsole();
             }  
 
-            List<String> categorizedTokens = new ArrayList<>();
-                for (String token : userInput) {
-                String category = orderTokens(token);
-                categorizedTokens.add(token + " (" + category + ")");
-                System.out.println(category);
-
             }
 
-            if(orderTokens(userInput[2]).equalsIgnoreCase("IDENTIFIER")){
-                 GeneralHelpers.createTable(userInput[2]);
-                }
+         
         }
 
 
        
-    }
-
-    
-    public static String orderTokens(String token) {
-
-        if (token.equalsIgnoreCase("CREATE") || token.equalsIgnoreCase("TABLE")) {
-            return "KEYWORD";
-        }
-        else if (token.matches("[a-zA-Z_][a-zA-Z0-9_]*")) {
-            return "IDENTIFIER";
-        }
-        else if (token.matches("\\d+")) {
-            return "NUMBER";
-        }
-        else {
-            return "UNKNOWN";
-        }
 }
+
+  
         
-}
+
 

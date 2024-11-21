@@ -1,32 +1,56 @@
 package helpers;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
+import java.util.ArrayList;
+import model.Tokenizer;
 
 public class GeneralHelpers {
     
     static Scanner myScanner = new Scanner(System.in);
 
-    public static String[] getUserInput(){
+    public static ArrayList<String> getUserInput(){
 
-        String userInput = myScanner.nextLine();
-        String[] splitedUserInput = userInput.split("[\\s,()]+");
+        myScanner.useDelimiter(";");
+        String userInput = myScanner.next();
+        ArrayList<String> splitedUserInput = Tokenizer.tokenizeUserInput(userInput);
          return splitedUserInput;
 
     }
 
-    public static void createTable(String nameOftable){
+    public static void createTable(ArrayList<String> splittedQuery){
         
-        String fileName = nameOftable + ".cvs";
+        String fileName = splittedQuery.get(2) + ".cvs";
         String path = "src/myTables/";
         File directory = new File(path);
-        System.out.println("HOLIII!");
 
         try {
-          
+            
             File myTable = new File(directory+"\\"+fileName);
             new File(myTable.getParent()).mkdirs();
             if (myTable.createNewFile()) {
+
+                String headers = "";
+
+                for(int i = 3; i<splittedQuery.size(); i++){
+
+                    if(i + 1 == splittedQuery.size()){
+
+                        headers = headers + splittedQuery.get(i);
+
+                    }else{
+
+                        headers = headers + splittedQuery.get(i) + ",";
+
+                    }
+
+                }
+
+                FileWriter writer = new FileWriter(myTable);
+                writer.write(headers);
+                writer.close();
+                //To do: Create properties
 
                 System.out.println("Your table has been created succesfully!");
                 getUserInput();
@@ -58,37 +82,6 @@ public class GeneralHelpers {
     }
 
 
-    public static void CreateFiles(String[] args) throws Exception {
-    
-
-        System.out.print("Insert your file name: ");
-
-        String fileName = myScanner.nextLine() + ".cvs";
-
-        String path = "src/myTables/";
-
-        File myPath = new File(path);
-
-        try {
-          
-            File myTable = new File(path+fileName);
-
-            if (myTable.createNewFile()) {
-
-                System.out.println("YIPIEEE");
-                
-            }else{
-
-                System.out.println("Nooooo");
-
-
-            }
-        
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
-
 
 
     public static void closeProgram(){
@@ -102,3 +95,5 @@ public class GeneralHelpers {
   
 
 }
+
+
