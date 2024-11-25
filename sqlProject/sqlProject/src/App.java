@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import conditions.Cases;
 import helpers.GeneralHelpers;
 
 public class App {
@@ -12,11 +13,11 @@ public class App {
 
 
             ArrayList<String> query = GeneralHelpers.getUserInput();
+            
+            Cases.checkAllCases(query);
 
             System.out.println(query);
-            GeneralHelpers.createTable(query);
-
-           
+            
 
             String joinedStrings = String.join("", query);
             if(joinedStrings.equalsIgnoreCase("clear")){

@@ -20,6 +20,13 @@ public class GeneralHelpers {
     }
 
     public static void createTable(ArrayList<String> splittedQuery){
+
+        if (splittedQuery.size() < 5) {
+            
+            System.out.println("Llave, escribe bien mlp");
+            return;
+
+        }
         
         String fileName = splittedQuery.get(2) + ".cvs";
         String path = "src/myTables/";
@@ -33,17 +40,21 @@ public class GeneralHelpers {
 
                 String headers = "";
 
-                for(int i = 3; i<splittedQuery.size(); i++){
+                for(int i = 3; i<splittedQuery.size(); i = i+2){
 
-                    if(i + 1 == splittedQuery.size()){
 
-                        headers = headers + splittedQuery.get(i);
+                        if (i == splittedQuery.size() - 2) {
+                            
+                            headers = headers + splittedQuery.get(i);
 
-                    }else{
+                            
+                        }else{
 
-                        headers = headers + splittedQuery.get(i) + ",";
+                            headers = headers + splittedQuery.get(i) + ",";
 
-                    }
+                        }
+
+
 
                 }
 
@@ -62,7 +73,8 @@ public class GeneralHelpers {
 
 
             }
-        
+
+          
         
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,6 +100,22 @@ public class GeneralHelpers {
 
         myScanner.close();
         
+    }
+
+    public static void listAbles(){
+
+        String path = "src/myTables/";
+        File directory = new File(path);
+
+        File[] fileDirectory = directory.listFiles();
+        
+
+       for (int i = 0; i < fileDirectory.length; i++) {
+
+            System.out.println(fileDirectory[i].getName());
+        
+       }
+
     }
 
 

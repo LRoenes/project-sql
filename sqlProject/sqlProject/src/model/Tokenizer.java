@@ -10,10 +10,9 @@ public class Tokenizer {
     String regex = "\\s+|,|\\(|\\)";
 
     for(String token: command.split(regex)){
-        if(!tokens.equals("")){
-
-        tokens.add(token);
-            
+        
+        if (!token.isEmpty()) { // Verifica si el token no está vacío
+            tokens.add(token);
         }
 
 
